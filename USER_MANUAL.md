@@ -19,6 +19,31 @@ npm run dev
 
 Open the local URL shown in the terminal, normally `http://localhost:5173/`.
 
+## 3. Sign In or Sign Up
+
+The application opens on the authentication page.
+
+### Sign in
+
+Enter a work email and password, then select **Sign in securely**. In the current prototype, any valid-looking email and a password with at least six characters will open the workspace.
+
+### Sign up
+
+Select the **Sign up** tab and provide:
+
+- Full name
+- Work email
+- Password
+- Privacy-terms consent
+
+The prototype accepts the form locally and does not create a real account.
+
+### Demo workspace
+
+Select **Continue with demo workspace** to enter the application immediately. This is the recommended path for demonstrations.
+
+The current authentication screen is only a UI and workflow prototype. It does not provide real password storage, session security, email verification, password recovery, or role-based access. A production deployment must connect it to a secure authentication service.
+
 ### Production preview
 
 ```bash

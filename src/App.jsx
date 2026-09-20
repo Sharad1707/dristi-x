@@ -15,6 +15,9 @@ function App() {
   const [imageUrl, setImageUrl] = useState(null)
   const [status, setStatus] = useState('ready')
   const [activeNav, setActiveNav] = useState('Screening')
+  const [authenticated, setAuthenticated] = useState(false)
+
+  if (!authenticated) return <AuthPage onAuthenticated={() => setAuthenticated(true)} />
 
   const handleImage = (event) => {
     const file = event.target.files?.[0]
@@ -47,6 +50,18 @@ function App() {
       <footer className="app-footer"><span><i className="online-dot" /> Local inference mode</span><span>Drishti-XAI prototype · v0.1.0</span></footer>
     </main>
   </div>
+}
+
+function AuthPage({ onAuthenticated }) {
+  const [mode, setMode] = useState('login')
+  const [showPassword, setShowPassword] = useState(false)
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    onAuthenticated()
+  }
+
+  return <main className="auth-shell"><section className="auth-visual"><div className="auth-brand"><span className="brand-mark">◉</span><strong>drishti<span>-xai</span></strong></div><div className="auth-visual-copy"><p className="eyebrow">EXPLAINABLE EYE SCREENING</p><h1>Make every referral<br /><em>more informed.</em></h1><p>AI-assisted retinal screening for care teams working closer to the communities they serve.</p></div><div className="auth-visual-footer"><span>◌ Local-first workflow</span><span>◌ Clinician-led decisions</span></div></section><section className="auth-panel"><div className="auth-panel-inner"><div className="auth-mobile-brand"><span className="brand-mark">◉</span><strong>drishti<span>-xai</span></strong></div><div className="auth-heading"><p className="eyebrow">{mode === 'login' ? 'WELCOME BACK' : 'CREATE YOUR WORKSPACE'}</p><h2>{mode === 'login' ? 'Sign in to your workspace' : 'Create a care workspace'}</h2><p>{mode === 'login' ? 'Continue your screening work at Aranya Health Centre.' : 'Set up access for your healthcare screening team.'}</p></div><div className="auth-tabs" role="tablist"><button type="button" className={mode === 'login' ? 'auth-tab active' : 'auth-tab'} onClick={() => setMode('login')}>Sign in</button><button type="button" className={mode === 'signup' ? 'auth-tab active' : 'auth-tab'} onClick={() => setMode('signup')}>Sign up</button></div><form className="auth-form" onSubmit={handleSubmit}>{mode === 'signup' && <label>Full name<input type="text" placeholder="Dr. Riya Kapoor" required /></label>}<label>Work email<input type="email" placeholder="name@healthcentre.org" required /></label><label>Password<div className="password-field"><input type={showPassword ? 'text' : 'password'} placeholder="Enter your password" minLength="6" required /><button type="button" aria-label={showPassword ? 'Hide password' : 'Show password'} onClick={() => setShowPassword((value) => !value)}>{showPassword ? 'Hide' : 'Show'}</button></div></label>{mode === 'login' ? <div className="form-options"><label className="checkbox-label"><input type="checkbox" /> <span>Keep me signed in</span></label><button type="button" className="forgot-button">Forgot password?</button></div> : <label className="checkbox-label consent"><input type="checkbox" required /> <span>I agree to the workspace privacy terms</span></label>}<button type="submit" className="auth-submit">{mode === 'login' ? 'Sign in securely' : 'Create workspace'} <span>→</span></button></form><div className="auth-divider"><span>or</span></div><button type="button" className="demo-login" onClick={onAuthenticated}><span>◉</span> Continue with demo workspace</button><p className="auth-footnote">Demo mode uses local browser state only. No real account or patient data is created.</p></div></section></main>
 }
 
 function Sidebar({ activeNav, setActiveNav }) {

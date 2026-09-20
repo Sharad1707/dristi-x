@@ -38,9 +38,10 @@ The current application supports:
 14. Clinical decision-support disclaimer
 15. Functional Overview, Patients, Screening, Review queue, and Reports views
 16. Patient directory with screening status and case navigation
-17. Responsive desktop and mobile layouts
+17. Login and sign-up authentication entry screens
+18. Responsive desktop and mobile layouts
 
-The current result is intentionally simulated so the interface can be demonstrated before the ML service is connected.
+The current result is intentionally simulated so the interface can be demonstrated before the ML service is connected. Authentication is also a frontend prototype and does not yet validate accounts against a backend.
 
 ## Technology Stack
 
